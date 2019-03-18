@@ -454,5 +454,57 @@ angular.module('pele.states', [])
         }
       },
       src: ["app/apps/leads/reportCtrl.js"]
+    },
+    {
+      state: 'app.cc',
+      url: '/ccApp',
+      views: {
+        'menuContent@app': {
+          templateUrl: function() {
+            return 'app/apps/cc/ccMain.html';
+          },
+          controller: 'ccMainCtrl'
+        }
+      },
+      src: ["app/apps/cc/ccMain.js"]
+    },
+    {
+      state: 'app.cc.getenv',
+      url: '/ccApp',
+      views: {
+        'menuContent@app': {
+          templateUrl: function() {
+            return 'app/apps/cc/ccMain.html';
+          },
+          controller: 'ccMainCtrl'
+        }
+      },
+      src: ["app/apps/cc/ccMain.js"]
+    },
+    {
+      state: 'app.cc.packagelist',
+      url: '/packagelist/:env/:timestamp?',
+      views: {
+        'menuContent@app': {
+          templateUrl: function() {
+            return 'app/apps/cc/packagelist.html';
+          },
+          controller: 'packageListCtrl'
+        }
+      },
+      src: ["app/apps/cc/packageListCtrl.js"]
+    },
+    {
+      state: 'app.cc.packagedetails',
+      url: '/packagedetails/:pkg/:stat/:env',
+      views: {
+        'menuContent@app': {
+          templateUrl: function() {
+            return 'app/apps/cc/packagedetails.html';
+          },
+          controller: 'packagedetailsCtrl'
+        }
+      },
+      src: ["app/apps/cc/packagedetailsCtrl.js"]
     }
   ]);

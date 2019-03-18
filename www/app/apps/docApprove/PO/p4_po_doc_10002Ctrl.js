@@ -650,7 +650,8 @@ angular.module('pele')
                 }).finally(function() {
                   $ionicLoading.hide();
                   $scope.$broadcast('scroll.refreshComplete');
-                  $ionicNavBarDelegate.back();
+                  //$ionicNavBarDelegate.back();
+                  $ionicHistory.goBack();
                 });
               }
             });

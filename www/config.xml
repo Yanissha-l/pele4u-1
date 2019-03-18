@@ -1,6 +1,6 @@
 <?xml version='1.0' encoding='utf-8'?>
-<widget id="com.int-pele.pele4u" version="120" versionCode="120" xmlns="http://www.w3.org/ns/widgets" xmlns:gap="http://phonegap.com/ns/1.0">
-    <name> PELE4U</name>
+<widget id="com.int-pele.pele4u" version="122" versionCode="122" xmlns="http://www.w3.org/ns/widgets" xmlns:gap="http://phonegap.com/ns/1.0">
+    <name>PELE4U</name>
     <description>
     Work form anywhere
   </description>
@@ -18,9 +18,9 @@
         <allow-intent href="itms:*" />
         <allow-intent href="itms-apps:*" />
     </platform>
-    <preference name="phonegap-version" value="cli-7.0.1" />
+    <preference name="phonegap-version" value="cli-8.0.0" />
     <preference name="android-build-tool" value="gradle" />
-    <preference name="android-minSdkVersion" value="15" />
+    <preference name="android-minSdkVersion" value="19" />
     <preference name="android-targetSdkVersion" value="23" />
     <preference name="permissions" value="none" />
     <preference name="orientation" value="portrait" />
@@ -44,7 +44,7 @@
         <variable name="CAMERA_USAGE_DESCRIPTION" value="Allow the app to use your camera" />
         <variable name="PHOTOLIBRARY_USAGE_DESCRIPTION" value="Allow the app to access your photos" />
     </plugin>
-    <plugin name="cordova-plugin-console" spec="~1.0.5" />
+    <!-- <plugin name="cordova-plugin-console" spec="~1.0.5" /> -->
     <plugin name="cordova-plugin-device" spec="~1.1.4" />
     <plugin name="cordova-plugin-device-motion" spec="~1.2.3" />
     <plugin name="cordova-plugin-device-orientation" spec="~1.0.5" />
@@ -66,7 +66,7 @@
         <param name="URL_SCHEME" value="pele4u" />
     </plugin>
     <plugin name="cordova-plugin-whitelist" />
-    <plugin name="phonegap-plugin-barcodescanner" spec="^6.0.8">
+    <plugin name="phonegap-plugin-barcodescanner" spec="~7.0.4">
         <variable name="CAMERA_USAGE_DESCRIPTION" value="Allow the app to use your camera" />
         <variable name="PHOTOLIBRARY_USAGE_DESCRIPTION" value="Allow the app to access your photos" />
     </plugin>
@@ -112,7 +112,7 @@
     <splash platform="android" qualifier="xxxhdpi" src="res/screens/android/screen-xxxhdpi-portrait.png" />
 
     <gap:config-file parent="CFBundleShortVersionString" platform="ios">
-        <string>120</string>
+        <string>122</string>
     </gap:config-file>
     <access origin="*" />
     <allow-intent href="http://*/*" />

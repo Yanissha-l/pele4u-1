@@ -23,7 +23,7 @@ angular.module('pele')
 
           if (apiData.error) return false;
           
-          $scope.title = "בירור";
+          $scope.title = "ביאור";
           $scope.docDetails = PelApi.getJsonString(apiData.Result, "JSON[0]", true); 
           $scope.chat = $scope.docDetails.NOTE[0] || [];
           $scope.buttonsArr = $scope.docDetails.BUTTONS || [];

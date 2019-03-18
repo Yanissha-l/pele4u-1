@@ -1,8 +1,5 @@
 <ion-view cache-view="false">
 
-    <ion-nav-buttons side="right">
-        <button menu-toggle="left" class="button button-icon icon ion-navicon"></button>
-    </ion-nav-buttons>
     <ion-nav-buttons side="left">
         <button ng-show="page!='form'" class="button button-icon icon ion-ios-search" ng-click="setForm()"></button>
     </ion-nav-buttons>
@@ -23,7 +20,7 @@
                             <i class="icon ion-funnel placeholder-icon"></i>
                         </div>
                         <select class="pele_rtl text-right" ng-model="formData.subject">
-                            <option value="">סיבת בירור</option>
+                            <option value="">סיבת ביאור</option>
                             <option ng-repeat="x in noteSubject" value="{{x.NOTE_SUBJECT}}">{{x.NOTE_SUBJECT_DESC}}</option>
                         </select>
                     </label>
@@ -52,20 +49,19 @@
                 <h4 style="color: red">לא נמצאו עובדים התואמים לחיפוש</h4>
             </div>
         </div>
-
         <div class="row" ng-show="!formData.forwardUserName" style="margin: 10px 30px">
             <div class="col col-67 col-input">
                 <ion-item class="item item-input" style="border: 4px ridge #2196F3">
                     <input class="pele_rtl text-right" type="text" placeholder="נמענים נוספים" ng-model="formData.forwardUserNameSr[0].value">
                     <i class="icon ion-funnel placeholder-icon"></i>
                 </ion-item>
-                <div class="text-center" ng-show="hint">
-                    <strong>{{hint}}</strong>
-                </div>
             </div>
             <div class="col col-22">
                 <button ng-click="search(forwardUserNameSr[0].value)" class="button button-positive">חיפוש</button>
             </div>
+        </div>
+        <div class="text-center" ng-show="hint" >
+            <p style="color: red; font-weight: bold;">{{hint}}</p> 
         </div>
 
     </ion-content>
