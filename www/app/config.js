@@ -1,18 +1,22 @@
 /*********************/
-const env = "PD";
+const env = "DV";
 /********************/
 
-const EnvCodes = {
+const EnvCodes = { 
   PD: "PROD",
+  P2: "PROD",
   DV: "DEV",
-  QA: "QA",
+  QA: "QA", 
+  Q2: "QA",
   LP: "LP"
 };
 
 const SSOEnv = {
   PD: "PD",
+  P2: "P2",
   DV: "DV",
   QA: "QA",
+  Q2: "Q2",
   LP: "LP"
 }
 
@@ -38,7 +42,10 @@ const apiConfig = {
   menuTimeout: 15000,
   translateFlag: "N",
   flashTime: 2500,
-
+  authMethods  :{
+    ios:['pincode'],
+    android:['pincode','fingerprint']
+  },
   OneSignal: {
     DV: {
       appId: '430ad45c-c555-41f5-87c4-46f9d4be0cc1',
@@ -50,7 +57,17 @@ const apiConfig = {
       visualLevel: 0,
       logLevel: 0
     },
+    Q2: {
+      appId: "922ef47f-6abc-4df5-80ea-801a8b081fa1",
+      visualLevel: 0,
+      logLevel: 0
+    },
     PD: {
+      appId: "1d0135a7-da67-4953-b241-2385bfcedcd9",
+      visualLevel: 0,
+      logLevel: 0
+    },
+    P2: {
       appId: "1d0135a7-da67-4953-b241-2385bfcedcd9",
       visualLevel: 0,
       logLevel: 0
@@ -62,6 +79,12 @@ const apiConfig = {
     },
   },
   services: {
+    ADLogin: {
+      timeout: 15000,
+      retry: 0,
+      "endpoint": "/" + SSOEnv[env] + "/MobileServices/SSOService.svc/json/ADLogin",
+      "RequestHeader": ""
+    },
     GetUserMenu: {
       timeout: 15000,
       retry: 2,
@@ -175,8 +198,10 @@ angular.module('pele.config', [])
     api_timeout: 20000,
     gw_timeout: 15000,
     config: {
+      bioClientId:"NEVER_CHANGE_THIS_VALUE_BIOPELE4U" ,
+      bioClientSecret:"NEVER_CHANGE_THIS_VALUE",
       contactIdPrefix: "pelephone",
-      APP_VERSION: "122",
+      APP_VERSION: "141",
       SCAN_PRINT_SCANNING_ERROR: "שגיאה בסריקה",
       PIN_CODE_AUTHENTICATION_REQUIRED_CODE: "10000",
       IS_TOKEN_VALID: "N",
@@ -203,7 +228,9 @@ angular.module('pele.config', [])
       LOG_FILE_NAME: "Pele4U.txt",
       LOG_FILE_MAIL_RECIPIENT: {
         QA: "keen@pelephone.co.il",
+        Q2: "keen@pelephone.co.il",
         PD: "Mobile_Admins_HR@pelephone.co.il",
+        P2: "Mobile_Admins_HR@pelephone.co.il",
         LP: "Mobile_Admins_HR@pelephone.co.il",
         DEFAULT: "ghadad@gmail.com",
         DV: "ghadad@gmail.com"
@@ -320,6 +347,9 @@ angular.module('pele.config', [])
       },
       "FIN": {
         state: "app.inv_list"
+      },
+      "PAY": {
+        state: "app.pay_list"
       },
       "POWFTASK": {
         state: "app.chat_list"

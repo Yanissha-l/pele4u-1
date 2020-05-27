@@ -23,6 +23,21 @@ angular.module('pele.states', [])
       },
       src: ["app/apps/dev/devCtrl.js"]
     }, {
+      state: "app.ldap_login",
+      url: '/ldap_login',
+      params: {
+        reset: null,
+      },
+      views: {
+        'menuContent@app': {
+          templateUrl: function() {
+            return 'templates/auth/ldap_login.html';
+          },
+          controller: 'LdapLoginCtrl'
+        }
+      },
+      src: ["app/LdapLoginCtrl.js"]
+    },{
       state: "app.dev.network",
       url: '/log',
       views: {
@@ -161,6 +176,30 @@ angular.module('pele.states', [])
         }
       },
       src: ["app/apps/docApprove/INV/invDetailsCtrl.js"]
+    }, {
+      state: 'app.pay_list',
+      url: "/pay_list/:AppId/:FormType/:Pin",
+      views: {
+        'menuContent': {
+          templateUrl: function() {
+            return "app/apps/docApprove/PAY/payList.html";
+          },
+          controller: 'payListCtrl',
+        }
+      },
+      src: ["app/apps/docApprove/PAY/payListCtrl.js"]
+    }, {
+      state: 'app.pay_details',
+      url: "/pay_details/:formType/:AppId/:docId/:docInitId",
+      views: {
+        'menuContent': {
+          templateUrl: function() {
+            return "app/apps/docApprove/PAY/payDetails.html";
+          },
+          controller: 'payDetailsCtrl'
+        }
+      },
+      src: ["app/apps/docApprove/PAY/payDetailsCtrl.js"]
     }, {
       state: 'app.chat_list',
       url: "/chat_list/:AppId/:FormType/:Pin",
@@ -506,5 +545,65 @@ angular.module('pele.states', [])
         }
       },
       src: ["app/apps/cc/packagedetailsCtrl.js"]
-    }
+    },{
+      state: 'app.busLeads',
+      url: '/busLeads',
+      views: {
+        'menuContent@app': {
+          templateUrl: function() {
+            return 'app/apps/busLeads/menu.html';
+          },
+          controller: 'busMenuCtrl'
+        }
+      },
+      src: ["app/apps/busLeads/menuCtrl.js"]
+    },
+    {
+      state: 'app.busLeads.menu',
+      url: '/busLeads',
+      views: {
+        'menuContent@app': {
+          templateUrl: function() {
+            return 'app/apps/busLeads/menu.html';
+          },
+          controller: 'busMenuCtrl',
+        }
+      },
+      src: [
+        "app/apps/busLeads/menuCtrl.js"
+      ]
+    },
+    {
+      state: 'app.busLeads.lead',
+      url: '/busLeads/:type/:Title/',
+      params: {
+        lead: {},
+        task: {}
+      },
+      views: {
+        'menuContent@app': {
+          templateUrl: function() {
+            return 'app/apps/busLeads/lead.html';
+          },
+          controller: 'busLeadCtrl'
+        }
+      },
+      src: [
+        "lib/angular-sanitize.min.js",
+        "app/apps/busLeads/leadCtrl.js"
+      ]
+    },
+    {
+      state: 'app.busLeads.report',
+      url: '/report/:type/:Title/',
+      views: {
+        'menuContent@app': {
+          templateUrl: function() {
+            return 'app/apps/busLeads/report.html';
+          },
+          controller: 'leadsReportsCtrl'
+        }
+      },
+      src: ["app/apps/busLeads/reportCtrl.js"]
+    },
   ]);
