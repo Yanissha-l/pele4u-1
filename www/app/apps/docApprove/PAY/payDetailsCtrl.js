@@ -2,8 +2,8 @@
 Created by User on 27/05/2020.
 */
 angular.module('pele')
-  .controller('payDetailsCtrl', ['$scope', '$location', 'ApiService', '$ionicScrollDelegate', '$stateParams', '$ionicLoading', '$ionicModal', 'PelApi', '$ionicHistory', '$ionicPopup', '$cordovaFileTransfer',
-    function($scope, $location, ApiService, $ionicScrollDelegate, $stateParams, $ionicLoading, $ionicModal, PelApi, $ionicHistory, $ionicPopup, $cordovaFileTransfer) {
+  .controller('payDetailsCtrl', ['$scope', '$location', 'ApiService', '$ionicScrollDelegate', '$anchorScroll', '$stateParams', '$ionicLoading', '$ionicModal', 'PelApi', '$ionicHistory', '$ionicPopup', '$cordovaFileTransfer',
+    function($scope, $location, ApiService, $ionicScrollDelegate, $anchorScroll, $stateParams, $ionicLoading, $ionicModal, PelApi, $ionicHistory, $ionicPopup, $cordovaFileTransfer) {
       $scope.actionNote = {};
 
       $scope.formData = {
@@ -16,19 +16,22 @@ angular.module('pele')
       $scope.activeGroup = PelApi.sessionStorage.activeAccordionGroup;
 
       $scope.toggleActive = function(g) {
+        $scope.activeGroupTemp = $scope.activeGroup;
+        
         $scope.activeGroup === g.VENDOR_NAME ? $scope.activeGroup = "" : $scope.activeGroup = g.VENDOR_NAME;
         PelApi.sessionStorage.activeAccordionGroup = $scope.activeGroup;
+
+        if($scope.activeGroup !== "" && $scope.activeGroupTemp == ""){
+          $ionicScrollDelegate.scrollBy(0, 75, true);
+        }else if($scope.activeGroup == "" && $scope.activeGroupTemp !== ""){
+          $ionicScrollDelegate.scrollBy(0, -75, true);
+        }
       }
 
-      $scope.toggleActionItem = function(action) {
+      $scope.toggleActionItem = function(action){
         action.display = !action.display;
         if (action.display) action.left_icon = 'ion-chevron-down';
         else action.left_icon = 'ion-chevron-left';
-      }
-
-      $scope.toggleInvoicesShown = function(supplierIndScroll) {
-        $location.hash(supplierIndScroll.VENDOR_NAME);
-        $ionicScrollDelegate.anchorScroll();
       }
 
       $scope.onSlideMove = function(data) {
@@ -38,7 +41,7 @@ angular.module('pele')
       $scope.tabs = [{
         "text": "סבב מאשרים"
       }, {
-        "text": "פרטי הצוואה"
+        "text": "פרטי אצווה"
       }];
 
       $scope.notifLinks = PelApi.getDocApproveServiceUrl("SubmitNotif");
@@ -58,7 +61,7 @@ angular.module('pele')
           if (apiData.error) return false;          
           $scope.docDetails = PelApi.getJsonString(apiData.Result, "JSON[0]", true);
           $scope.suppliers  = $scope.docDetails.SUPPLIERS || [];
-          $scope.activeGroup = "";
+          $scope.activeGroup = $scope.docDetails.SUPPLIERS[0].VENDOR_NAME;
           $scope.chatSubjects = $scope.docDetails.CHAT_SUBJECTS || [];
           $scope.chatPersons = $scope.docDetails.CHAT_PERSONS || [];
           PelApi.extendActionHistory($scope.docDetails);

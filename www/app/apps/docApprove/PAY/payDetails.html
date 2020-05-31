@@ -59,10 +59,8 @@
           <ion-scroll class="pele_rtl text-right" scrollX="false" style="height:80%" delegate-handle="slide1Scroll">            
             <ion-list>
               <div class="docs-menu" ng-repeat="supplier in suppliers">
-                <ion-item class="item-stable" ng-click="toggleActive(supplier); toggleInvoicesShown(supplier)" ng-class="{active: supplier.active}" ng-style="{background:'#DCDCDC'}">
-                  
-                    <div class="col ellipsis">
-                      <!-- <ion-icon ng-class="activeGroup == supplier.VENDOR_NAME ? 'ion-arrow-down-b' : 'ion-arrow-left-b'"></ion-icon> -->
+                <ion-item class="item-stable" ng-click="toggleActive(supplier); " ng-class="{active: activeGroup == supplier.VENDOR_NAME}" ng-style="{background:'#DCDCDC'}">
+                    <div id= {{supplier.VENDOR_NUMBER}} class="col ellipsis">
                       <ion-icon ng-class="activeGroup == supplier.VENDOR_NAME ? 'ion-chevron-down' :'ion-chevron-left'"></ion-icon>                      
                       <strong> שם ספק: </strong>{{supplier.VENDOR_NAME}}
                     </div> 
@@ -73,9 +71,9 @@
                 </ion-item> 
                 
                 <ion-item class="docs-menu-details item-icon-left pele_rtl" ng-repeat="invoice in supplier.INVOICES_DETAILS | filter:searchText as filtered" ng-show="activeGroup == supplier.VENDOR_NAME" >                
-                   <div class="pele_rtl item-text-wrap text-right"><strong> מספר חשבונית: </strong>{{invoice.INVOICE_NUM}}</div>
-                   <div class="pele_rtl item-text-wrap text-right"><strong> סכום חשבוניות: </strong>{{invoice.INVOICE_AMOUNT}}</div>
-                   <div class="pele_rtl item-text-wrap text-right"><strong> תיאור: </strong>{{invoice.INVOICE_DESCRIPTION}}</div>
+                   <div class="pele_rtl item-text-wrap text-right" style="padding-right: 7%"><strong> מספר חשבונית: </strong>{{invoice.INVOICE_NUM}}</div>
+                   <div class="pele_rtl item-text-wrap text-right" style="padding-right: 7%"><strong> סכום חשבונית: </strong>{{invoice.INVOICE_AMOUNT}}</div>
+                   <div class="pele_rtl item-text-wrap text-right" style="padding-right: 7%"><strong> תיאור: </strong>{{invoice.INVOICE_DESCRIPTION}}</div>
                 </ion-item>
               </div>
             </ion-list>
