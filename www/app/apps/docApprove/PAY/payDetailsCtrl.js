@@ -2,10 +2,11 @@
 Created by User on 27/05/2020.
 */
 angular.module('pele')
-  .controller('payDetailsCtrl', ['$scope', '$location', 'ApiService', '$ionicScrollDelegate', '$anchorScroll', '$stateParams', '$ionicLoading', '$ionicModal', 'PelApi', '$ionicHistory', '$ionicPopup', '$cordovaFileTransfer',
-    function($scope, $location, ApiService, $ionicScrollDelegate, $anchorScroll, $stateParams, $ionicLoading, $ionicModal, PelApi, $ionicHistory, $ionicPopup, $cordovaFileTransfer) {
+  .controller('payDetailsCtrl', ['$scope', '$location', '$timeout','ApiService', '$ionicScrollDelegate', '$anchorScroll', '$stateParams', '$ionicLoading', '$ionicModal', 'PelApi', '$ionicHistory', '$ionicPopup', '$cordovaFileTransfer',
+    function($scope, $location, $timeout, ApiService, $ionicScrollDelegate, $anchorScroll, $stateParams, $ionicLoading, $ionicModal, PelApi, $ionicHistory, $ionicPopup, $cordovaFileTransfer) {
       $scope.actionNote = {};
-
+      $scope.prevTopPos = 0;
+      $scope.genTopPos = 0;
       $scope.formData = {
         subject: "",
         forwardUserName: ""
@@ -16,17 +17,31 @@ angular.module('pele')
       $scope.activeGroup = PelApi.sessionStorage.activeAccordionGroup;
 
       $scope.toggleActive = function(g) {
+        
         $scope.activeGroupTemp = $scope.activeGroup;
         
         $scope.activeGroup === g.VENDOR_NAME ? $scope.activeGroup = "" : $scope.activeGroup = g.VENDOR_NAME;
         PelApi.sessionStorage.activeAccordionGroup = $scope.activeGroup;
 
+        //var firstElement  =  document.getElementById($scope.docDetails.SUPPLIERS[0].VENDOR_NAME);
+        //var firstElementTop = firstElement.getBoundingClientRect(); 
+        //$scope.genTopPos = firstElementTop.top;        
+
+        var currentElement  =  document.getElementById(g.VENDOR_NAME);
+        var currentElementTop = currentElement.getBoundingClientRect();        
+        var movie = 0;
+        
         if($scope.activeGroup !== "" && $scope.activeGroupTemp == ""){
-          $ionicScrollDelegate.scrollBy(0, 75, true);
-        }else if($scope.activeGroup == "" && $scope.activeGroupTemp !== ""){
-          $ionicScrollDelegate.scrollBy(0, -75, true);
+          movie = currentElementTop.top - 130;
+          $ionicScrollDelegate.scrollBy(0, movie, true);
+        } else if($scope.activeGroup !== "" && $scope.activeGroupTemp !== "" && currentElementTop.top >= 135){
+          $ionicScrollDelegate.scrollBy(0, 60, true);
+          console.log("currentElementTop " + currentElementTop.top);
+          console.log("prevTopPos " + $scope.prevTopPos);
+          
         }
-      }
+        $scope.prevTopPos = currentElementTop.top;
+      }      
 
       $scope.toggleActionItem = function(action){
         action.display = !action.display;
@@ -67,7 +82,6 @@ angular.module('pele')
           PelApi.extendActionHistory($scope.docDetails);
           $scope.buttonsArr = $scope.docDetails.BUTTONS || [];  
           
-
         }).error(function(error, httpStatus, headers, config) {
           var time = config.responseTimestamp - config.requestTimestamp;
           var tr = ' (TS  : ' + (time / 1000) + ' seconds)';
