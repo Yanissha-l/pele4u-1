@@ -76,7 +76,7 @@ angular.module('pele')
           if (apiData.error) return false;          
           $scope.docDetails = PelApi.getJsonString(apiData.Result, "JSON[0]", true);
           $scope.suppliers  = $scope.docDetails.SUPPLIERS || [];
-          $scope.activeGroup = $scope.docDetails.SUPPLIERS[0].VENDOR_NAME;
+          $scope.activeGroup = ""; //$scope.docDetails.SUPPLIERS[0].VENDOR_NAME
           $scope.chatSubjects = $scope.docDetails.CHAT_SUBJECTS || [];
           $scope.chatPersons = $scope.docDetails.CHAT_PERSONS || [];
           PelApi.extendActionHistory($scope.docDetails);

@@ -66,7 +66,7 @@
                     </div> 
                     <div><strong> מספר ספק: </strong>{{supplier.VENDOR_NUMBER}}</div>
                     <div><strong> כמות חשבוניות: </strong>{{supplier.INVOICE_COUNT}}</div>
-                    <div><strong> סכום חשבוניות: </strong>{{supplier.SUM_INVOICES}}</div>
+                    <div><strong> סכום חשבוניות: {{supplier.SUM_INVOICES}}</strong></div>
                     <div ng-hide="supplier.PAY_THRU_DATE == null"><strong> תאריך פירעון : </strong>{{supplier.PAY_THRU_DATE|peldate | date : 'hh:ss dd-MM-yyyy'}}</div>
                 </ion-item> 
                 
